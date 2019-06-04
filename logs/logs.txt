@@ -1,0 +1,30 @@
+2019-02-28 15:38:00 [ INFO] Start analysis
+2019-02-28 15:38:00 [DEBUG] 
+2019-02-28 15:38:16 [ INFO] Start analysis
+2019-02-28 15:38:16 [DEBUG] 
+2019-02-28 15:41:31 [ INFO] Start analysis
+2019-02-28 15:41:31 [DEBUG] 
+2019-02-28 15:42:31 [ INFO] Start analysis
+2019-02-28 15:42:31 [DEBUG] 
+2019-02-28 15:46:08 [ INFO] Start analysis
+2019-02-28 15:46:08 [DEBUG] -db example/iPRG2015/iPRG2015_no6.fasta -ms example/iPRG2015/JD_06232014_sample1-A.mgf -pep LLSYVDDEAFIRDVAK
+2019-02-28 15:46:08 [ INFO] Valid target peptides: 1
+2019-02-28 15:46:14 [ INFO] Time elapsed: 0.10 min
+2019-02-28 15:46:14 [ INFO] Time elapsed: 0.10 min
+2019-02-28 15:46:16 [ INFO] Time elapsed: 0.14 min
+2019-02-28 15:46:17 [ INFO] Time elapsed: 0.16 min
+2019-02-28 15:46:17 [ INFO] End.
+2019-02-28 15:58:06 [ INFO] Start analysis
+2019-02-28 15:58:06 [DEBUG] 
+2019-05-25 18:17:55 [ INFO] Start analysis
+2019-05-25 18:17:55 [DEBUG] 
+2019-05-25 18:18:41 [ INFO] Start analysis
+2019-05-25 18:18:41 [DEBUG] 
+2019-05-25 18:18:51 [ INFO] Start analysis
+2019-05-25 18:18:51 [DEBUG] -printPTM
+2019-05-25 19:53:36 [ INFO] Start analysis
+2019-05-25 19:53:36 [DEBUG] 
+2019-05-25 19:54:06 [ INFO] Start analysis
+2019-05-25 19:54:06 [DEBUG] 
+2019-06-04 12:47:02 [ INFO] Start analysis
+2019-06-04 12:47:02 [DEBUG] 
