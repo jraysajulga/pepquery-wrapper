@@ -16,36 +16,197 @@
     <command>java -jar bin/pepquery.jar -h</command>
 
     <inputs>
+        <param name="input" type="data" argument="-i" help="Take protein, DNA or VCF as input" />
+        <param name="Input type" type="select" argument="-t" help="" >
+            <option value="protein">protein</option>
+            <option value="dna">DNA</option>
+            <option value="vcf">VCF</option>
+            <option value="bed">BED</option>
+            <option value="gtf">GTF</option>
+         </param>
         <param name="Annotation file" type="data" argument="-anno" help="Annotation files folder for VCF/BED/GTF" />
-         <param name="Max missed cleavages" type="text" argument="-c" help="The max missed cleavages, default is 2" />
-         <param name="" type="text" argument="-db" help="Fasta format database file" />
-         <param name="" type="text" argument="-e" help="1:Trypsin (default), 2:Trypsin (no P rule), 3:Arg-C, 4:Arg-C (no P rule), 5:Arg-N, 6:Glu-C, 7:Lys-C" />
-         <param name="" type="text" argument="-f" help="The frame to translate DNA sequence to protein (The right format is like this: "1,2,3,4,5,6","1,2,3","1". "0" means to keep the longest frame. In default, for each frame only the longest protein is used)." />
-         <param name="" type="text" argument="-fixMod" help="Fixed modification, the format is like : 1,2,3. Default is 6 (Carbamidomethylation(C)[57.02])" />
-         <param name="" type="text" argument="-fragmentMethod" help="1: CID/HCD (default), 2: ETD" />
-         <param name="" type="text" argument="-i" help="Take protein, DNA or VCF as input" />
-         <param name="" type="text" argument="-itol" help="Fragment ion m/z tolerance, default is 0.6da" />
-         <param name="" type="text" argument="-m" help="Scoring method: 1=HyperScore (default), 2=MVH" />
-         <param name="" type="text" argument="-maxCharge" help="The maximum charge to consider if the charge state is not available, default is 3" />
-         <param name="" type="text" argument="-maxVar" help="Max number of variable modifications, default is 3" />
-         <param name="" type="text" argument="-minCharge" help="The minimum charge to consider if the charge state is not available, default is 2" />
-         <param name="" type="text" argument="-minPeaks" help="Min peaks in spectrum, default is 10" />
-         <param name="" type="text" argument="-minScore" help="Minimum score to consider for peptide searching, default is 5" />
-         <param name="" type="text" argument="-ms" help="Spectrum file used for identification, mgf format" />
-         <param name="" type="text" argument="-n" help="The number of random peptides, default is 1000" />
-         <param name="" type="text" argument="-o" help="Output dir" />
-         <param name="" type="text" argument="-pep" help="Peptide sequence which you want to search" />
-         <param name="" type="text" argument="-prefix" help="Output file prefix" />
-         <param name="" type="boolean" argument="-printPTM" help="Print PTMs" />
-         <param name="" type="text" argument="-t" help="Input type: 1=>protein,2=>DNA,3=>VCF,4=>BED,5=>GTF" />
-         <param name="" type="text" argument="-tol" help="Precursor ion m/z tolerance, default is 10" />
-         <param name="" type="text" argument="-tolu" help="The unit of precursor ion m/z tolerance, default is ppm" />
-         <param name="" type="text" argument="-um" help="The unit of precursor ion m/z tolerance, default is ppm. Validation with unrestricted modification searching" />
-         <param name="" type="text" argument="-varMod" help="Variable modification, the format is like : 1,2,3. Default is 107 (Oxidation(M)[15.99])" />
+         <param name="Max missed cleavages" type="integer" argument="-c" help="The max missed cleavages, default is 2" />
+         <param name="Database file" type="data" argument="-db" help="Fasta format database file" />
+         <param name="Modifications" type="integer" argument="-e" help="" >
+            <option value="tryp_def">Trypsin (default)</option>
+            <option value="tryp_noP">Trypsin (no P rule)</option>
+            <option value="argc">Arg-C</option>
+            <option value="argc_noP">Arg-C (no P rule)</option>
+            <option value="argn">Arg-N</option>
+            <option value="gluc">Glu-C</option>
+            <option value="lysc">Lys-C</option>
+         </param>
+         <param name="Frame" type="text" argument="-f" help='The frame to translate DNA sequence to protein (The right format is like this: "1,2,3,4,5,6","1,2,3","1". "0" means to keep the longest frame. In default, for each frame only the longest protein is used).' />
+         <param name="Fixed modification" type="text" argument="-fixMod" help="Fixed modification, the format is like : 1,2,3. Default is 6 (Carbamidomethylation(C)[57.02])" />
+         <param name="Fragment Method" type="select" argument="-fragmentMethod">
+            <option value="cid_hcd">CID/HCD</option>
+            <option value="etd">ETD</option>
+         </param>
+         <param name="tolerance" type="float" argument="-itol" help="Fragment ion m/z tolerance, default is 0.6da" />
+         <param name="scoring_method" type="select" argument="-m">
+            <option value="hyperscore">HyperScore</option>
+            <option value="mvh">MVH</option>
+        </param>
+         <param name="max_charge" type="integer" argument="-maxCharge" help="The maximum charge to consider if the charge state is not available, default is 3" />
+         <param name="max_mods" type="integer" argument="-maxVar" help="Max number of variable modifications, default is 3" />
+         <param name="min_charge" type="integer" argument="-minCharge" help="The minimum charge to consider if the charge state is not available, default is 2" />
+         <param name="min_peaks" type="integer" argument="-minPeaks" help="Min peaks in spectrum, default is 10" />
+         <param name="min_score" type="integer" argument="-minScore" value="5" help="Minimum score to consider for peptide searching, default is 5" />
+         <param name="spectrum_file" type="data" argument="-ms" help="Spectrum file used for identification, mgf format" />
+         <param name="num_random_peptides" type="text" argument="-n" help="The number of random peptides, default is 1000" />
+         <param name="search_seq" optional="true" type="text" argument="-pep" help="Peptide sequence which you want to search" />
+         <param name="precursor_tolerance" type="integer" argument="-tol" help="Precursor ion m/z tolerance, default is 10" />
+         <param name="precursor_unit" type="text" argument="-tolu" help="The unit of precursor ion m/z tolerance, default is ppm" />
+         <param name="unmodified" type="boolean" argument="-um" help="Validation with unrestricted modification searching" />
+         <param name="var_mod" type="select" multiple="true" argument="-varMod" help="Variable modification, the format is like : 1,2,3. Default is 107 (Oxidation(M)[15.99])" >
+            <option value="mod1">HexNAc of T (203.07937251951006)[0]</option>
+            <option value="mod2">HexNAc of S (203.07937251951006)[0]</option>
+            <option value="mod3">Propionyl of peptide N-term light (56.02621474784)[5]</option>
+            <option value="mod4">iTRAQ 8-plex of K (304.1990394611601)[0]</option>
+            <option value="mod5">Dimethylation of K 2H(6) 13C(2) (36.075670278260006)[0]</option>
+            <option value="mod6">Carbamidomethylation of C (57.02146372057)[0]</option>
+            <option value="mod7">Dioxidation of M (31.98982923912)[0]</option>
+            <option value="mod8">Guanidination of K (42.02179807374)[0]</option>
+            <option value="mod9">TMT 6-plex of K (229.16293213472008)[0]</option>
+            <option value="mod10">Propionyl of peptide N-term heavy (59.03627926124)[5]</option>
+            <option value="mod11">Formylation of protein N-term (27.99491461956)[1]</option>
+            <option value="mod12">Diiodination of Y (251.79329593586)[0]</option>
+            <option value="mod13">ICPL10 of peptide N-term (115.06669973028997)[5]</option>
+            <option value="mod14">Amidation of the protein C-term (-0.9840155826899988)[3]</option>
+            <option value="mod15">Acetylation of peptide N-term (42.0105646837)[5]</option>
+            <option value="mod16">Palmitoylation of protein N-term (238.22966558166)[1]</option>
+            <option value="mod17">ICAT-O (227.12699141827005)[0]</option>
+            <option value="mod18">TMT 2-plex of peptide N-term (225.15583272792006)[5]</option>
+            <option value="mod19">Label of K 2H(4) (4.025106982920001)[0]</option>
+            <option value="mod20">Isoleucine 13C(6) 15N(1) (7.017163920200005)[0]</option>
+            <option value="mod21">Arginine 13C(6) (6.0201290268000065)[0]</option>
+            <option value="mod22">Acetylation of K (42.0105646837)[0]</option>
+            <option value="mod23">Dimethylation of peptide N-term 2H(6) 13C(2) (36.075670278260006)[5]</option>
+            <option value="mod24">ICPL0 of K (105.02146372057001)[0]</option>
+            <option value="mod25">Trimethylation of protein N-term A (42.04695019242001)[1]</option>
+            <option value="mod26">Thioacyl of peptide N-term (87.99828574784)[5]</option>
+            <option value="mod27">Trideuterated Methyl Ester of R (17.034480301330003)[0]</option>
+            <option value="mod28">ICPL4 of peptide N-term (109.04657070348998)[5]</option>
+            <option value="mod29">4-Hydroxyproline (83.07349929343002)[0]</option>
+            <option value="mod30">Hex(5) HexNAc(4) NeuAc(2) of N (2204.7724401834835)[0]</option>
+            <option value="mod31">Palmitoylation of T (238.22966558166)[0]</option>
+            <option value="mod32">Palmitoylation of S (238.22966558166)[0]</option>
+            <option value="mod33">Methylation of K (14.01565006414)[0]</option>
+            <option value="mod34">Hexose of K (162.05282341850005)[0]</option>
+            <option value="mod35">Methylation of E (14.01565006414)[0]</option>
+            <option value="mod36">Lysine 13C(6) (6.0201290268000065)[0]</option>
+            <option value="mod37">Palmitoylation of K (238.22966558166)[0]</option>
+            <option value="mod38">Methylation of C (14.01565006414)[0]</option>
+            <option value="mod39">Sodium adduct to D (21.98194424883)[0]</option>
+            <option value="mod40">Methylation of D (14.01565006414)[0]</option>
+            <option value="mod41">Pyrolidone from carbamidomethylated C (-17.026549101009998)[6]</option>
+            <option value="mod42">Sodium adduct to E (21.98194424883)[0]</option>
+            <option value="mod43">ICPL6 of peptide N-term (111.04159274737)[5]</option>
+            <option value="mod44">Dehydration of S (-18.0105646837)[0]</option>
+            <option value="mod45">Palmitoylation of C (238.22966558166)[0]</option>
+            <option value="mod46">Propionamide of C (71.03711378470999)[0]</option>
+            <option value="mod47">mTRAQ of peptide N-term light (140.09496301400003)[5]</option>
+            <option value="mod48">Propionyl of K light (56.02621474784)[0]</option>
+            <option value="mod49">Dehydration of T (-18.0105646837)[0]</option>
+            <option value="mod50">Hex(5) HexNAc(4) NeuAc(2) Na of N (2226.7543844323136)[0]</option>
+            <option value="mod51">Lysine 2H(4) (4.025106982920001)[0]</option>
+            <option value="mod52">ICAT-9 (236.15718495847005)[0]</option>
+            <option value="mod53">Dimethylation of peptide N-term (28.031300128279995)[5]</option>
+            <option value="mod54">Propionamide of K (71.03711378470999)[0]</option>
+            <option value="mod55">TMT 10-plex of peptide N-term (229.16293213472008)[5]</option>
+            <option value="mod56">Methylation of S (14.01565006414)[0]</option>
+            <option value="mod57">Methylation of R (14.01565006414)[0]</option>
+            <option value="mod58">Homoserine of peptide C-term M (-29.992806444580005)[8]</option>
+            <option value="mod59">Proline 13C(5) (5.016774189000003)[0]</option>
+            <option value="mod60">Farnesylation of C (204.18780076968)[0]</option>
+            <option value="mod61">Trimethylation of K (42.04695019242001)[0]</option>
+            <option value="mod62">iTRAQ 8-plex of peptide N-term (304.1990394611601)[5]</option>
+            <option value="mod63">FormylMet of protein N-term (159.03539953255)[1]</option>
+            <option value="mod64">Dimethylation of K (28.031300128279995)[0]</option>
+            <option value="mod65">mTRAQ of K 13C(3) 15N (144.10206242080005)[0]</option>
+            <option value="mod66">Carboxymethylation of C (58.005479303259996)[0]</option>
+            <option value="mod67">Guanidination of peptide N-term (42.02179807374)[5]</option>
+            <option value="mod68">Acetylation of protein N-term (42.0105646837)[1]</option>
+            <option value="mod69">Trimethylation of R (42.04695019242001)[0]</option>
+            <option value="mod70">Pyrolidone from E (-18.010564683699997)[6]</option>
+            <option value="mod71">Dimethylation of R (28.031300128279995)[0]</option>
+            <option value="mod72">TMT 2-plex of K (225.15583272792006)[0]</option>
+            <option value="mod73">Pyrolidone from Q (-17.026549101009998)[6]</option>
+            <option value="mod74">18O(1) of peptide C-term (2.0042463804400015)[7]</option>
+            <option value="mod75">18O(2) of peptide C-term (4.008492760880003)[7]</option>
+            <option value="mod76">Acetaldehyde +26 (26.015650064139997)[5]</option>
+            <option value="mod77">Formylation of K (27.99491461956)[0]</option>
+            <option value="mod78">Dioxidation of W (31.98982923912)[0]</option>
+            <option value="mod79">mTRAQ of K light (140.09496301400003)[0]</option>
+            <option value="mod80">Ubiquitination of K (114.04292744114002)[0]</option>
+            <option value="mod81">Formylation of T (27.99491461956)[0]</option>
+            <option value="mod82">Nethylmaleimide of C (125.04767846841)[0]</option>
+            <option value="mod83">Formylation of S (27.99491461956)[0]</option>
+            <option value="mod84">iTRAQ 8-plex of Y (304.1990394611601)[0]</option>
+            <option value="mod85">ICPL4 of K (109.04657070348998)[0]</option>
+            <option value="mod86">Formylation of peptide N-term (27.99491461956)[5]</option>
+            <option value="mod87">mTRAQ of peptide N-term 13C(6) 15N(2) (148.10916182760005)[5]</option>
+            <option value="mod88">TMT 6-plex of peptide N-term (229.16293213472008)[5]</option>
+            <option value="mod89">Carbamilation of K (43.00581365643)[0]</option>
+            <option value="mod90">mTRAQ of 13C(6) 15N(2) (148.10916182760005)[0]</option>
+            <option value="mod91">SUMO-2/3 Q87R (471.2077609201101)[0]</option>
+            <option value="mod92">iTRAQ 4-plex of Y (144.10206242080005)[0]</option>
+            <option value="mod93">Dimethylation of peptide N-term 2H(4) (32.0564071112)[5]</option>
+            <option value="mod94">iTRAQ 4-plex of K (144.10206242080005)[0]</option>
+            <option value="mod95">Sulfation of Y (79.95681485867999)[0]</option>
+            <option value="mod96">Sulfation of S (79.95681485867999)[0]</option>
+            <option value="mod97">Sulfation of T (79.95681485867999)[0]</option>
+            <option value="mod98">TMT 10-plex of K (229.16293213472008)[0]</option>
+            <option value="mod99">Oxidation of C (15.99491461956)[0]</option>
+            <option value="mod100">Amidation of the peptide C-term (-0.9840155826899988)[7]</option>
+            <option value="mod101">Carbamilation of protein N-term (43.00581365643)[1]</option>
+            <option value="mod102">ICPL6 of K (111.04159274737)[0]</option>
+            <option value="mod103">Propionamide of peptide N-term (71.03711378470999)[5]</option>
+            <option value="mod104">Phosphorylation of Y (79.96633052074999)[0]</option>
+            <option value="mod105">Didehydro of T (-2.01565006414)[0]</option>
+            <option value="mod106">Oxidation of K (15.99491461956)[0]</option>
+            <option value="mod107">Oxidation of M (15.99491461956)[0]</option>
+            <option value="mod108">Phosphorylation of T (79.96633052074999)[0]</option>
+            <option value="mod109">Oxidation of P (15.99491461956)[0]</option>
+            <option value="mod110">Trioxidation of C (47.98474385868)[0]</option>
+            <option value="mod111">Dimethylation of K 2H(6) (34.068960602660006)[0]</option>
+            <option value="mod112">NIPCAM of C (99.06841391299)[0]</option>
+            <option value="mod113">Methylthio of N (45.987721064140004)[0]</option>
+            <option value="mod114">Trideuterated Methyl Ester of K (17.034480301330003)[0]</option>
+            <option value="mod115">Trideuterated Methyl Ester of E (17.034480301330003)[0]</option>
+            <option value="mod116">Methylthio of C (45.987721064140004)[0]</option>
+            <option value="mod117">Phosphorylation of S (79.96633052074999)[0]</option>
+            <option value="mod118">Methylthio of D (45.987721064140004)[0]</option>
+            <option value="mod119">Trideuterated Methyl Ester of D (17.034480301330003)[0]</option>
+            <option value="mod120">ICPL10 of K (115.06669973028997)[0]</option>
+            <option value="mod121">Deamidation of N 18O (2.9882619631300003)[0]</option>
+            <option value="mod122">Dimethylation of peptide N-term 2H(6) (34.068960602660006)[5]</option>
+            <option value="mod123">Pyridylethyl of C (105.05784922929)[0]</option>
+            <option value="mod124">Arginine 13C(6) 15N(4) (10.008268600400015)[0]</option>
+            <option value="mod125">Trideuterated Methyl Ester of peptide C-term (17.034480301330003)[5]</option>
+            <option value="mod126">Hex(1)NAc(1) of S (365.1321959380101)[0]</option>
+            <option value="mod127">Hex(1)NAc(1) of T (365.1321959380101)[0]</option>
+            <option value="mod128">Propionyl of K heavy (59.03627926124)[0]</option>
+            <option value="mod129">Citrullination of R (0.9840155826899988)[0]</option>
+            <option value="mod130">mTRAQ of peptide N-term 13C(3) 15N (144.10206242080005)[5]</option>
+            <option value="mod131">ICPL0 of peptide N-term (105.02146372057001)[5]</option>
+            <option value="mod132">Geranyl-geranyl of C (272.25040102623996)[0]</option>
+            <option value="mod133">Lysine 13C(6) 15N(2) (8.014198813600004)[0]</option>
+            <option value="mod134">Homoserine lactone of peptide C-term M (-48.00337112828)[8]</option>
+            <option value="mod135">Carbamidomethylation of E (57.02146372057)[0]</option>
+            <option value="mod136">Dimethylation of K 2H(4) (32.0564071112)[0]</option>
+            <option value="mod137">Glutathione of C (305.06815621281)[0]</option>
+            <option value="mod138">Carbamidomethylation of K (57.02146372057)[0]</option>
+            <option value="mod139">Lipoyl of K (188.0329570044)[0]</option>
+            <option value="mod140">Leucine 13C(6) 15N(1) (7.017163920200005)[0]</option>
+            <option value="mod141">iTRAQ 4-plex of peptide N-term (144.10206242080005)[5]</option>
+            <option value="mod142">Deamidation of Q (0.9840155826899988)[0]</option>
+            <option value="mod143">Deamidation of N (0.9840155826899988)[0]</option>
+         </param>
     </inputs>
 
     <outputs>
-        <data format="tabular" name="molecular_function_abundance" label="${tool.name} on ${on_string}: Molecular function abundance"/>
+        <data format="tabular" name="input" label="${tool.name} on ${on_string}: Molecular function abundance"/>
     </outputs>
 
     <help><![CDATA[
