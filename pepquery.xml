@@ -1,4 +1,4 @@
-<tool id="pepquery" name="PepQuery" version="0.1.1">
+<tool id="pepquery" name="PepQuery" version="1.0">
     <description>Peptide-centric search engine for novel peptide identification and validation.</description>
 
     <stdio>
@@ -16,7 +16,7 @@
     <command>java -jar bin/pepquery.jar -h</command>
 
     <inputs>
-        <param name="input" type="data" argument="-i" help="Take protein, DNA or VCF as input" />
+        <param name="input" type="data" format="tabular" argument="-i" help="Take protein, DNA or VCF as input" />
         <param name="Input type" type="select" argument="-t" help="" >
             <option value="protein">protein</option>
             <option value="dna">DNA</option>
@@ -24,9 +24,9 @@
             <option value="bed">BED</option>
             <option value="gtf">GTF</option>
          </param>
-        <param name="Annotation file" type="data" argument="-anno" help="Annotation files folder for VCF/BED/GTF" />
+        <param name="Annotation file" type="data" format="tabular" argument="-anno" help="Annotation files folder for VCF/BED/GTF" />
          <param name="Max missed cleavages" type="integer" argument="-c" help="The max missed cleavages, default is 2" />
-         <param name="Database file" type="data" argument="-db" help="Fasta format database file" />
+         <param name="Database file" type="data" format="tabular" argument="-db" help="Fasta format database file" />
          <param name="Modifications" type="integer" argument="-e" help="" >
             <option value="tryp_def">Trypsin (default)</option>
             <option value="tryp_noP">Trypsin (no P rule)</option>
@@ -52,7 +52,7 @@
          <param name="min_charge" type="integer" argument="-minCharge" help="The minimum charge to consider if the charge state is not available, default is 2" />
          <param name="min_peaks" type="integer" argument="-minPeaks" help="Min peaks in spectrum, default is 10" />
          <param name="min_score" type="integer" argument="-minScore" value="5" help="Minimum score to consider for peptide searching, default is 5" />
-         <param name="spectrum_file" type="data" argument="-ms" help="Spectrum file used for identification, mgf format" />
+         <param name="spectrum_file" type="data" format="tabular" argument="-ms" help="Spectrum file used for identification, mgf format" />
          <param name="num_random_peptides" type="text" argument="-n" help="The number of random peptides, default is 1000" />
          <param name="search_seq" optional="true" type="text" argument="-pep" help="Peptide sequence which you want to search" />
          <param name="precursor_tolerance" type="integer" argument="-tol" help="Precursor ion m/z tolerance, default is 10" />
@@ -208,6 +208,7 @@
     <outputs>
         <data format="tabular" name="input" label="${tool.name} on ${on_string}: Molecular function abundance"/>
     </outputs>
+
 
     <help><![CDATA[
         PepQuery is a peptide-centric search engine for novel peptide identification and validation. Cancer genomics studies have identified a large number of genomic alterations that may lead to novel, cancer-specific protein sequences. Proteins resulted from these genomic alterations are attractive candidates for cancer biomarkers and therapeutic targets. The leading approach to proteomic validation of genomic alterations is to analyze tandem mass spectrometry (MS/MS) data using customized proteomics databases created from genomics data. Such analysis is time-consuming and requires thorough training and detailed knowledge in proteomics data analysis, leading to a gap between MS/MS data and the cancer genomics community. PepQuery does not require customized databases and allows quick and easy proteomic validation of genomic alterations.
