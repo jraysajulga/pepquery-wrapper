@@ -1,7 +1,5 @@
 <tool id="pepquery" name="PepQuery" version="1.0">
     <description>Peptide-centric search engine for novel peptide identification and validation.</description>
-
-    <command>java -jar bin/pepquery.jar -h</command>
     <macros>
         <xml name="modifications">
             <option value="1">HexNAc of T (203.07937251951006)[0]</option>
@@ -147,7 +145,10 @@
             <option value="143">Deamidation of N (0.9840155826899988)[0]</option>
         </xml>
     </macros>
-
+    <requirements> 
+        <requirement type="package" version="@VERSION@">pepquery</requirement>
+    </requirements>
+    <command>java -jar bin/pepquery.jar -h</command>
     <inputs>
         <param label="Input" name="input" type="data" format="tabular" argument="-i" help="Take protein, DNA or VCF as input" />
         <param name="input_type" label="Input Type" type="select" argument="-t" help="" >
