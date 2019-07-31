@@ -149,6 +149,11 @@
     </macros>
 
     <inputs>
+        <section name="req_inputs" title="Required Inputs" expanded="true">
+            <param name="spectrum_file" type="data" format="mgf" argument="-ms" help="Spectrum file used for identification, mgf format" />
+            <param name="db_file" type="data" format="tabular" argument="-db" help="Fasta format database file" />
+            <param name="search_seq" optional="true" type="text" argument="-pep" help="Peptide sequence which you want to search" />
+        </section>
         <param name="input" type="data" format="tabular" argument="-i" help="Take protein, DNA or VCF as input" />
         <param name="input_type" type="select" argument="-t" help="" >
             <option value="protein">protein</option>
@@ -159,7 +164,6 @@
          </param>
         <param name="annotation_file" type="data" format="tabular" argument="-anno" help="Annotation files folder for VCF/BED/GTF" />
          <param name="max_missed_cleavages" type="integer" value="2" argument="-c" help="The max missed cleavages" />
-         <param name="db_file" type="data" format="tabular" argument="-db" help="Fasta format database file" />
          <param name="peptidase" type="select" argument="-e" help="" >
             <option value="tryp_def">Trypsin (default)</option>
             <option value="tryp_noP">Trypsin (no P rule)</option>
@@ -184,9 +188,7 @@
          <param name="min_charge" type="integer" value="2" argument="-minCharge" help="The minimum charge to consider if the charge state is not available" />
          <param name="min_peaks" type="integer" value="10" argument="-minPeaks" help="Min peaks in spectrum" />
          <param name="min_score" type="integer" value="5" argument="-minScore" help="Minimum score to consider for peptide searching" />
-         <param name="spectrum_file" type="data" format="mgf" argument="-ms" help="Spectrum file used for identification, mgf format" />
          <param name="num_random_peptides" type="integer" value="1000" argument="-n" help="The number of random peptides" />
-         <param name="search_seq" optional="true" type="text" argument="-pep" help="Peptide sequence which you want to search" />
          <param name="precursor_tolerance" type="integer" value="10" argument="-tol" help="Precursor ion m/z tolerance" />
          <param name="precursor_unit" type="text" argument="-tolu" help="The unit of precursor ion m/z tolerance, default is ppm" />
          <param name="unmodified" type="boolean" value="false" argument="-um" help="Validation with unrestricted modification searching" />
