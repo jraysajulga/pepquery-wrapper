@@ -150,17 +150,21 @@
     </requirements>
     <command>java -jar bin/pepquery.jar -h</command>
     <inputs>
-        <param label="Input" name="input" type="data" format="tabular" argument="-i" help="Take protein, DNA or VCF as input" />
+        <section name="req_inputs" title="Required Inputs" expanded="true">
+            <param name="spectrum_file" type="data" format="mgf" argument="-ms" help="Spectrum file used for identification, mgf format" />
+            <param label="Database File" name="db_file" type="data" format="tabular" argument="-db" help="Fasta format database file" />
+            <param name="search_seq" optional="true" type="text" argument="-pep" help="Peptide sequence which you want to search" />
+        </section>
+        <param name="input" type="data" format="tabular" argument="-i" help="Take protein, DNA or VCF as input" />
         <param name="input_type" label="Input Type" type="select" argument="-t" help="" >
             <option value="protein">protein</option>
             <option value="dna">DNA</option>
             <option value="vcf">VCF</option>
             <option value="bed">BED</option>
             <option value="gtf">GTF</option>
-         </param>
+        </param>
         <param name="annotation_file" label="Annotation File" type="data" format="tabular" argument="-anno" help="Annotation files folder for VCF/BED/GTF" />
          <param label="Max Missed Cleavages" name="max_missed_cleavages" type="integer" value="2" argument="-c" help="The max missed cleavages" />
-         <param label="Database File" name="db_file" type="data" format="tabular" argument="-db" help="Fasta format database file" />
          <param label="Peptidase" name="peptidase" type="select" argument="-e" help="" >
             <option value="tryp_def">Trypsin (default)</option>
             <option value="tryp_noP">Trypsin (no P rule)</option>
