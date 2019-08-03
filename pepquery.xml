@@ -199,11 +199,20 @@
                         <param name="dna_input_selector" label="Multiple DNA sequences?" type="boolean" help="" />
                         <when value="true">
                             <param label="DNA Sequences (.txt)" name="search_seq" type="data" argument="-i" help="DNA sequence file containing proteins which you want to search (no column header)." />
+
                         </when>
                         <when value="false">
                             <param label="DNA Sequence" name="search_seq" type="text" argument="-i" help="DNA sequence which you want to search" />
                         </when>
                     </conditional>
+                    <param label="Frame(s) for DNA translation" name="frame" display="checkbox" type="select" multiple="true" help="The frame(s) to translate DNA sequence to protein. Selecting nothing (default) keeps the longest frame">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </param>
                 </when>
                 <when value="3">   
                     <param label="VCF File" name="search_seq" format="vcf" type="data" argument="-i" help="" />
