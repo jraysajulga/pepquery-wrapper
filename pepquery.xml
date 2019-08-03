@@ -242,7 +242,7 @@
              <param label="Max Modifications" name="max_mods" type="integer" value="3" argument="-maxVar" help="Max number of variable modifications" />
              <param label="Unmodified" name="unmodified" type="boolean" value="false" argument="-um" help="Validation with unrestricted modification searching" />
         </section>
-        <section name="ms_params" title="Mass spectrometry parameters" expanded="true">
+        <section name="ms_params" title="Mass spectrometry" expanded="true">
             <section name="tolerance_params" title="Tolerance" expanded="true">
                 <param label="Precursor Tolerance" name="precursor_tolerance" type="integer" value="10" argument="-tol" help="the error window on experimental peptide mass values. This parameter is usually set according to the mass spectrometer which was used to generate the MS/MS data." />
                 <param label="Precursor Unit" name="precursor_unit" type="select" argument="-tolu" help="The unit of precursor ion m/z tolerance, default is ppm">
@@ -251,18 +251,20 @@
                 </param>
                 <param label="Tolerance" name="tolerance" type="float" value="0.6" argument="-itol" help="Error window for MS/MS fragment ion mass values in Da unit." />
             </section>
+            <section name="digestion" title="Digestion" expanded="true">
+                <param label="Peptidase" name="peptidase" type="select" argument="-e" help="" >
+                    <option value="tryp_def">Trypsin (default)</option>
+                    <option value="tryp_noP">Trypsin (no P rule)</option>
+                    <option value="argc">Arg-C</option>
+                    <option value="argc_noP">Arg-C (no P rule)</option>
+                    <option value="argn">Arg-N</option>
+                    <option value="gluc">Glu-C</option>
+                    <option value="lysc">Lys-C</option>
+                </param>
+                <param label="Max Missed Cleavages" name="max_missed_cleavages" type="integer" value="2" argument="-c" help="The max missed cleavages" />
+            </section>
         </section>
         <!--
-         <param label="Max Missed Cleavages" name="max_missed_cleavages" type="integer" value="2" argument="-c" help="The max missed cleavages" />
-         <param label="Peptidase" name="peptidase" type="select" argument="-e" help="" >
-            <option value="tryp_def">Trypsin (default)</option>
-            <option value="tryp_noP">Trypsin (no P rule)</option>
-            <option value="argc">Arg-C</option>
-            <option value="argc_noP">Arg-C (no P rule)</option>
-            <option value="argn">Arg-N</option>
-            <option value="gluc">Glu-C</option>
-            <option value="lysc">Lys-C</option>
-         </param>
          <param label="Fragmentation Method" name="frag_method" type="select" argument="-fragmentMethod">
             <option value="cid_hcd">CID/HCD</option>
             <option value="etd">ETD</option>
