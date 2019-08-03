@@ -148,14 +148,21 @@
     <requirements> 
         <requirement type="package" version="@VERSION@">pepquery</requirement>
     </requirements>
-    <command>java -jar bin/pepquery.jar -h</command>
+    <command detect_errors="exit_code">
+        <![CDATA[
+            mv $req_inputs.spectrum_file ${req_inputs.spectrum_file}.mgf &&
+            pepquery 
+                -ms ${req_inputs.spectrum_file}.mgf
+                -pep $req_inputs.search_seq
+        ]]>
+    </command>
     <inputs>
         <section name="req_inputs" title="Required Inputs" expanded="true">
             <param name="spectrum_file" type="data" format="mgf" argument="-ms" help="Spectrum file used for identification, mgf format" />
-            <param label="Database File" name="db_file" type="data" format="tabular" argument="-db" help="Fasta format database file" />
+            <param label="Database File" name="db_file" type="data" format="fasta" argument="-db" help="Fasta format database file" />
             <param name="search_seq" optional="true" type="text" argument="-pep" help="Peptide sequence which you want to search" />
         </section>
-        <param name="input" type="data" format="tabular" argument="-i" help="Take protein, DNA or VCF as input" />
+        <!--<param name="input" type="data" format="tabular" argument="-i" help="Take protein, DNA or VCF as input" />
         <param name="input_type" label="Input Type" type="select" argument="-t" help="" >
             <option value="protein">protein</option>
             <option value="dna">DNA</option>
@@ -206,7 +213,7 @@
                 <option value="6" selected="true">Carbamidomethylation of C (57.02146372057)[0]</option>
                 <expand macro="modifications" />
              </param>
-         </section>
+         </section>-->
     </inputs>
 
     <outputs>
