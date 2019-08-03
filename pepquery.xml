@@ -161,8 +161,6 @@
     </command>
     <inputs>
         <section name="req_inputs" title="Input Data" expanded="true">
-            <param name="spectrum_file" type="data" format="mgf" argument="-ms" help="Spectrum file used for identification, mgf format" />
-            <param label="Database File" name="db_file" type="data" format="fasta" argument="-db" help="Fasta format database file" />
             <conditional name="input_type">
                 <param name="input_type_selector" label="Input Type" type="select" argument="-t" help="" >
                     <option value="peptide">peptide</option>
@@ -227,6 +225,8 @@
                     <param label="Annotation Files" name="anno" type="data" multiple="true" argument="-anno" help="Annotation files for the GTF file. Please follow preparation instructions here: http://bioconductor.org/packages/devel/bioc/html/PGA.html" />
                 </when>
             </conditional>
+            <param label="Database File" name="db_file" type="data" format="fasta" argument="-db" help="Fasta format database file" />
+            <param label="Spectrum File" name="spectrum_file" type="data" format="mgf" argument="-ms" help="Spectrum file used for identification, mgf format" />
         </section>
         <section name="modifications" title="Modifications">
              <param name="fixed_mod" label="Fixed modification(s)" type="select" multiple="true" argument="-fixMod" help="Fixed modification">
