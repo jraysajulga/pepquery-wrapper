@@ -252,7 +252,7 @@
                 <param label="Tolerance" name="tolerance" type="float" value="0.6" argument="-itol" help="Error window for MS/MS fragment ion mass values in Da unit." />
             </section>
             <section name="digestion" title="Digestion" expanded="true">
-                <param label="Peptidase" name="peptidase" type="select" argument="-e" help="" >
+                <param label="Enzyme" name="enzyme" type="select" argument="-e" help="Enzyme used for protein digestion" >
                     <option value="tryp_def">Trypsin (default)</option>
                     <option value="tryp_noP">Trypsin (no P rule)</option>
                     <option value="argc">Arg-C</option>
