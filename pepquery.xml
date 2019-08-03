@@ -160,7 +160,7 @@
         ]]>
     </command>
     <inputs>
-        <section name="req_inputs" title="Required Inputs" expanded="true">
+        <section name="req_inputs" title="Input Data" expanded="true">
             <param name="spectrum_file" type="data" format="mgf" argument="-ms" help="Spectrum file used for identification, mgf format" />
             <param label="Database File" name="db_file" type="data" format="fasta" argument="-db" help="Fasta format database file" />
             <conditional name="input_type">
@@ -228,41 +228,7 @@
                 </when>
             </conditional>
         </section>
-        <!--<param name="input" type="data" format="tabular" argument="-i" help="Take protein, DNA or VCF as input" />
-        
-        <param name="annotation_file" label="Annotation File" type="data" format="tabular" argument="-anno" help="Annotation files folder for VCF/BED/GTF" />
-         <param label="Max Missed Cleavages" name="max_missed_cleavages" type="integer" value="2" argument="-c" help="The max missed cleavages" />
-         <param label="Peptidase" name="peptidase" type="select" argument="-e" help="" >
-            <option value="tryp_def">Trypsin (default)</option>
-            <option value="tryp_noP">Trypsin (no P rule)</option>
-            <option value="argc">Arg-C</option>
-            <option value="argc_noP">Arg-C (no P rule)</option>
-            <option value="argn">Arg-N</option>
-            <option value="gluc">Glu-C</option>
-            <option value="lysc">Lys-C</option>
-         </param>
-         <param label="Frame" name="frame" type="text" argument="-f" help='The frame to translate DNA sequence to protein (The right format is like this: "1,2,3,4,5,6","1,2,3","1". "0" means to keep the longest frame. In default, for each frame only the longest protein is used).' />
-         <param label="Fragmentation Method" name="frag_method" type="select" argument="-fragmentMethod">
-            <option value="cid_hcd">CID/HCD</option>
-            <option value="etd">ETD</option>
-         </param>
-         <param label="Tolerance" name="tolerance" type="float" value="0.6" argument="-itol" help="Fragment ion m/z tolerance." />
-         <param label="Scoring Method" name="scoring_method" type="select" argument="-m">
-            <option value="hyperscore">HyperScore</option>
-            <option value="mvh">MVH</option>
-        </param>
-         <param label="Max Charge" name="max_charge" type="integer" value="3" argument="-maxCharge" help="The maximum charge to consider if the charge state is not available" />
-         <param label="Max Modifications" name="max_mods" type="integer" value="3" argument="-maxVar" help="Max number of variable modifications" />
-         <param label="Minimum Charge" name="min_charge" type="integer" value="2" argument="-minCharge" help="The minimum charge to consider if the charge state is not available" />
-         <param label="Minimum Peaks" name="min_peaks" type="integer" value="10" argument="-minPeaks" help="Min peaks in spectrum" />
-         <param label="Minimum Score" name="min_score" type="integer" value="5" argument="-minScore" help="Minimum score to consider for peptide searching" />
-         <param label="Spectrum File" name="spectrum_file" type="data" format="mgf" argument="-ms" help="Spectrum file used for identification, mgf format" />
-         <param label="Number of Random Peptides" name="num_random_peptides" type="integer" value="1000" argument="-n" help="The number of random peptides" />
-         <param label="Search Sequence" name="search_seq" optional="true" type="text" argument="-pep" help="Peptide sequence which you want to search" />
-         <param label="Precursor Tolerance" name="precursor_tolerance" type="integer" value="10" argument="-tol" help="Precursor ion m/z tolerance" />
-         <param label="Precursor Unit" name="precursor_unit" type="text" argument="-tolu" help="The unit of precursor ion m/z tolerance, default is ppm" />
-         <param label="Unmodified" name="unmodified" type="boolean" value="false" argument="-um" help="Validation with unrestricted modification searching" />
-         <section name="mods" title="Modifications" expanded="true">
+        <section name="modifications" title="Modifications">
              <param name="fixed_mod" label="Fixed modification(s)" type="select" multiple="true" argument="-fixMod" help="Fixed modification">
                 <option value="107" selected="true">Oxidation of M (15.99491461956)[0]</option>
                 <option value="6">Carbamidomethylation of C (57.02146372057)[0]</option>
@@ -273,7 +239,38 @@
                 <option value="6" selected="true">Carbamidomethylation of C (57.02146372057)[0]</option>
                 <expand macro="modifications" />
              </param>
-         </section>-->
+             <param label="Max Modifications" name="max_mods" type="integer" value="3" argument="-maxVar" help="Max number of variable modifications" />
+             <param label="Unmodified" name="unmodified" type="boolean" value="false" argument="-um" help="Validation with unrestricted modification searching" />
+        </section>
+        <!--
+         <param label="Max Missed Cleavages" name="max_missed_cleavages" type="integer" value="2" argument="-c" help="The max missed cleavages" />
+         <param label="Peptidase" name="peptidase" type="select" argument="-e" help="" >
+            <option value="tryp_def">Trypsin (default)</option>
+            <option value="tryp_noP">Trypsin (no P rule)</option>
+            <option value="argc">Arg-C</option>
+            <option value="argc_noP">Arg-C (no P rule)</option>
+            <option value="argn">Arg-N</option>
+            <option value="gluc">Glu-C</option>
+            <option value="lysc">Lys-C</option>
+         </param>
+         <param label="Fragmentation Method" name="frag_method" type="select" argument="-fragmentMethod">
+            <option value="cid_hcd">CID/HCD</option>
+            <option value="etd">ETD</option>
+         </param>
+         <param label="Tolerance" name="tolerance" type="float" value="0.6" argument="-itol" help="Fragment ion m/z tolerance." />
+         <param label="Scoring Method" name="scoring_method" type="select" argument="-m">
+            <option value="hyperscore">HyperScore</option>
+            <option value="mvh">MVH</option>
+        </param>
+         <param label="Max Charge" name="max_charge" type="integer" value="3" argument="-maxCharge" help="The maximum charge to consider if the charge state is not available" />
+         <param label="Minimum Charge" name="min_charge" type="integer" value="2" argument="-minCharge" help="The minimum charge to consider if the charge state is not available" />
+         <param label="Minimum Peaks" name="min_peaks" type="integer" value="10" argument="-minPeaks" help="Min peaks in spectrum" />
+         <param label="Minimum Score" name="min_score" type="integer" value="5" argument="-minScore" help="Minimum score to consider for peptide searching" />
+         <param label="Number of Random Peptides" name="num_random_peptides" type="integer" value="1000" argument="-n" help="The number of random peptides" />
+
+         <param label="Precursor Tolerance" name="precursor_tolerance" type="integer" value="10" argument="-tol" help="Precursor ion m/z tolerance" />
+         <param label="Precursor Unit" name="precursor_unit" type="text" argument="-tolu" help="The unit of precursor ion m/z tolerance, default is ppm" />
+         -->
     </inputs>
     <outputs>
         <data format="tabular" name="psm" from_work_dir="pepquery_output/psm.txt" label="${tool.name} on ${on_string}: PSM"/>
