@@ -165,10 +165,10 @@
                 <param name="input_type_selector" label="Input Type" type="select" argument="-t" help="" >
                     <option value="peptide">peptide</option>
                     <option value="1">protein</option>
-                    <option value="2">DNA</option>
-                    <option value="3">VCF</option>
-                    <option value="4">BED</option>
-                    <option value="5">GTF</option>
+                    <option value="2">DNA (translate to protein sequences)</option>
+                    <option value="3">VCF (translate to protein sequences)</option>
+                    <option value="4">BED (translate to protein sequences)</option>
+                    <option value="5">GTF (translate to protein sequences)</option>
                 </param>
                 <when value="peptide">
                     <conditional name="peptide_input_type">
