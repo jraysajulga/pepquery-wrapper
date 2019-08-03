@@ -150,9 +150,11 @@
     </requirements>
     <command detect_errors="exit_code">
         <![CDATA[
-            mv $req_inputs.spectrum_file ${req_inputs.spectrum_file}.mgf &&
+            cp $req_inputs.spectrum_file ${req_inputs.spectrum_file}.mgf &&
+            cp $req_inputs.db_file ${req_inputs.db_file}.fa &&
             pepquery 
                 -ms ${req_inputs.spectrum_file}.mgf
+                -db ${req_inputs.db_file}.fa
                 -pep $req_inputs.search_seq
         ]]>
     </command>
