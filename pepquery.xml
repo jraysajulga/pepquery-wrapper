@@ -155,7 +155,7 @@
             pepquery 
                 -ms ${req_inputs.spectrum_file}.mgf
                 -db ${req_inputs.db_file}.fa
-                -pep $req_inputs.search_seq
+                -pep $req_inputs.input_type.peptide_input_type.search_seq
             -o pepquery_output
         ]]>
     </command>
