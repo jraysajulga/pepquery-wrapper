@@ -228,7 +228,7 @@
             <param label="Database File" name="db_file" type="data" format="fasta" argument="-db" help="Fasta format database file" />
             <param label="Spectrum File" name="spectrum_file" type="data" format="mgf" argument="-ms" help="Spectrum file used for identification, mgf format" />
         </section>
-        <section name="modifications" title="Modifications">
+        <section name="modifications" title="Modifications" expanded="true">
              <param name="fixed_mod" label="Fixed modification(s)" type="select" multiple="true" argument="-fixMod" help="Fixed modification">
                 <option value="107" selected="true">Oxidation of M (15.99491461956)[0]</option>
                 <option value="6">Carbamidomethylation of C (57.02146372057)[0]</option>
@@ -241,6 +241,16 @@
              </param>
              <param label="Max Modifications" name="max_mods" type="integer" value="3" argument="-maxVar" help="Max number of variable modifications" />
              <param label="Unmodified" name="unmodified" type="boolean" value="false" argument="-um" help="Validation with unrestricted modification searching" />
+        </section>
+        <section name="ms_params" title="Mass spectrometry parameters" expanded="true">
+            <section name="tolerance_params" title="Tolerance" expanded="true">
+                <param label="Precursor Tolerance" name="precursor_tolerance" type="integer" value="10" argument="-tol" help="the error window on experimental peptide mass values. This parameter is usually set according to the mass spectrometer which was used to generate the MS/MS data." />
+                <param label="Precursor Unit" name="precursor_unit" type="select" argument="-tolu" help="The unit of precursor ion m/z tolerance, default is ppm">
+                    <option value="ppm" selected="true">ppm</option>
+                    <option value="Da">Da</option>
+                </param>
+                <param label="Tolerance" name="tolerance" type="float" value="0.6" argument="-itol" help="Error window for MS/MS fragment ion mass values in Da unit." />
+            </section>
         </section>
         <!--
          <param label="Max Missed Cleavages" name="max_missed_cleavages" type="integer" value="2" argument="-c" help="The max missed cleavages" />
@@ -257,7 +267,7 @@
             <option value="cid_hcd">CID/HCD</option>
             <option value="etd">ETD</option>
          </param>
-         <param label="Tolerance" name="tolerance" type="float" value="0.6" argument="-itol" help="Fragment ion m/z tolerance." />
+         
          <param label="Scoring Method" name="scoring_method" type="select" argument="-m">
             <option value="hyperscore">HyperScore</option>
             <option value="mvh">MVH</option>
@@ -268,8 +278,6 @@
          <param label="Minimum Score" name="min_score" type="integer" value="5" argument="-minScore" help="Minimum score to consider for peptide searching" />
          <param label="Number of Random Peptides" name="num_random_peptides" type="integer" value="1000" argument="-n" help="The number of random peptides" />
 
-         <param label="Precursor Tolerance" name="precursor_tolerance" type="integer" value="10" argument="-tol" help="Precursor ion m/z tolerance" />
-         <param label="Precursor Unit" name="precursor_unit" type="text" argument="-tolu" help="The unit of precursor ion m/z tolerance, default is ppm" />
          -->
     </inputs>
     <outputs>
