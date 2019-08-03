@@ -205,6 +205,10 @@
                         </when>
                     </conditional>
                 </when>
+                <when value="3">   
+                    <param label="VCF" name="search_seq" format="vcf" type="data" argument="-i" help="" />
+                    <param label="Annotation Files" name="search_seq" type="data" multiple="true" argument="-anno" help="Annotation files for the VCF. Please follow preparation instructions here: http://bioconductor.org/packages/devel/bioc/html/PGA.html" />
+                </when>
             </conditional>
         </section>
         <!--<param name="input" type="data" format="tabular" argument="-i" help="Take protein, DNA or VCF as input" />
