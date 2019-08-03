@@ -194,6 +194,17 @@
                         </when>
                     </conditional>
                 </when>
+                <when value="2">
+                    <conditional name="dna_input_type">
+                        <param name="dna_input_selector" label="Multiple DNA sequences?" type="boolean" help="" />
+                        <when value="true">
+                            <param label="DNA Sequences (.txt)" name="search_seq" type="data" argument="-i" help="DNA sequence file containing proteins which you want to search (no column header)." />
+                        </when>
+                        <when value="false">
+                            <param label="DNA Sequence" name="search_seq" type="text" argument="-i" help="DNA sequence which you want to search" />
+                        </when>
+                    </conditional>
+                </when>
             </conditional>
         </section>
         <!--<param name="input" type="data" format="tabular" argument="-i" help="Take protein, DNA or VCF as input" />
