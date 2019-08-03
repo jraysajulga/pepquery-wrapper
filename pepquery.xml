@@ -163,16 +163,30 @@
         <section name="req_inputs" title="Required Inputs" expanded="true">
             <param name="spectrum_file" type="data" format="mgf" argument="-ms" help="Spectrum file used for identification, mgf format" />
             <param label="Database File" name="db_file" type="data" format="fasta" argument="-db" help="Fasta format database file" />
-            <param name="search_seq" optional="true" type="text" argument="-pep" help="Peptide sequence which you want to search" />
+            <conditional name="input_type">
+                <param name="input_type_selector" label="Input Type" type="select" argument="-t" help="" >
+                    <option value="peptide">peptide</option>
+                    <option value="1">protein</option>
+                    <option value="2">DNA</option>
+                    <option value="3">VCF</option>
+                    <option value="4">BED</option>
+                    <option value="5">GTF</option>
+                </param>
+                <when value="peptide">
+                    <conditional name="peptide_input_type">
+                        <param name="peptide_input_selector" label="Multiple peptides?" type="boolean" help="" />
+                        <when value="true">
+                            <param label="Peptide Sequences (.txt)" name="search_seq" type="data" argument="-pep" help="Peptide sequence file containing peptides which you want to search" />
+                        </when>
+                        <when value="false">
+                            <param label="Peptide Sequence" name="search_seq" type="text" argument="-pep" help="Peptide sequence which you want to search" />
+                        </when>
+                    </conditional>
+                </when>
+            </conditional>
         </section>
         <!--<param name="input" type="data" format="tabular" argument="-i" help="Take protein, DNA or VCF as input" />
-        <param name="input_type" label="Input Type" type="select" argument="-t" help="" >
-            <option value="protein">protein</option>
-            <option value="dna">DNA</option>
-            <option value="vcf">VCF</option>
-            <option value="bed">BED</option>
-            <option value="gtf">GTF</option>
-        </param>
+        
         <param name="annotation_file" label="Annotation File" type="data" format="tabular" argument="-anno" help="Annotation files folder for VCF/BED/GTF" />
          <param label="Max Missed Cleavages" name="max_missed_cleavages" type="integer" value="2" argument="-c" help="The max missed cleavages" />
          <param label="Peptidase" name="peptidase" type="select" argument="-e" help="" >
@@ -218,7 +232,6 @@
              </param>
          </section>-->
     </inputs>
-
     <outputs>
         <data format="tabular" name="psm" from_work_dir="pepquery_output/psm.txt" label="${tool.name} on ${on_string}: PSM"/>
         <data format="tabular" name="psm_annotation" from_work_dir="pepquery_output/psm_annotation.txt" label="${tool.name} on ${on_string}: PSM Annotation"/>
@@ -227,7 +240,7 @@
         <data format="tabular" name="psm_rank_txt" from_work_dir="pepquery_output/psm_rank.txt" label="${tool.name} on ${on_string}: PSM Rank (txt)"/>
     </outputs>
 
-
+    
     <help><![CDATA[
         PepQuery is a peptide-centric search engine for novel peptide identification and validation. Cancer genomics studies have identified a large number of genomic alterations that may lead to novel, cancer-specific protein sequences. Proteins resulted from these genomic alterations are attractive candidates for cancer biomarkers and therapeutic targets. The leading approach to proteomic validation of genomic alterations is to analyze tandem mass spectrometry (MS/MS) data using customized proteomics databases created from genomics data. Such analysis is time-consuming and requires thorough training and detailed knowledge in proteomics data analysis, leading to a gap between MS/MS data and the cancer genomics community. PepQuery does not require customized databases and allows quick and easy proteomic validation of genomic alterations.
     ]]></help>
