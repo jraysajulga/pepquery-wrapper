@@ -187,10 +187,10 @@
                     <conditional name="protein_input_type">
                         <param name="protein_input_selector" label="Multiple protein sequences?" type="boolean" help="" />
                         <when value="true">
-                            <param label="Protein Sequences (.txt)" name="search_seq" type="data" argument="-pep" help="Protein sequence file containing proteins which you want to search (no column header)." />
+                            <param label="Protein Sequences (.txt)" name="search_seq" type="data" argument="-i" help="Protein sequence file containing proteins which you want to search (no column header)." />
                         </when>
                         <when value="false">
-                            <param label="Protein Sequence" name="search_seq" type="text" argument="-pep" help="Protein sequence which you want to search" />
+                            <param label="Protein Sequence" name="search_seq" type="text" argument="-i" help="Protein sequence which you want to search" />
                         </when>
                     </conditional>
                 </when>
