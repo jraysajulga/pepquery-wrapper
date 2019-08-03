@@ -263,24 +263,22 @@
                 </param>
                 <param label="Max Missed Cleavages" name="max_missed_cleavages" type="integer" value="2" argument="-c" help="The max missed cleavages" />
             </section>
+            <section name="search" title="PSM" expanded="true">
+                <param label="Fragmentation Method" name="frag_method" type="select" argument="-fragmentMethod">
+                    <option value="cid_hcd">CID/HCD</option>
+                    <option value="etd">ETD</option>
+                </param>
+                <param label="Scoring Method" name="scoring_method" type="select" argument="-m">
+                    <option value="hyperscore">HyperScore</option>
+                    <option value="mvh">MVH</option>
+                </param>
+                <param label="Max Charge" name="max_charge" type="integer" value="3" argument="-maxCharge" help="The maximum charge to consider if the charge state is not available" />
+                <param label="Minimum Charge" name="min_charge" type="integer" value="2" argument="-minCharge" help="The minimum charge to consider if the charge state is not available" />
+                <param label="Minimum Peaks" name="min_peaks" type="integer" value="10" argument="-minPeaks" help="Min peaks in spectrum" />
+                <param label="Minimum Score" name="min_score" type="integer" value="5" argument="-minScore" help="Minimum score to consider for peptide searching" />
+                <param label="Number of Random Peptides" name="num_random_peptides" type="integer" value="1000" argument="-n" help="The number of random peptides" />
+            </section>
         </section>
-        <!--
-         <param label="Fragmentation Method" name="frag_method" type="select" argument="-fragmentMethod">
-            <option value="cid_hcd">CID/HCD</option>
-            <option value="etd">ETD</option>
-         </param>
-         
-         <param label="Scoring Method" name="scoring_method" type="select" argument="-m">
-            <option value="hyperscore">HyperScore</option>
-            <option value="mvh">MVH</option>
-        </param>
-         <param label="Max Charge" name="max_charge" type="integer" value="3" argument="-maxCharge" help="The maximum charge to consider if the charge state is not available" />
-         <param label="Minimum Charge" name="min_charge" type="integer" value="2" argument="-minCharge" help="The minimum charge to consider if the charge state is not available" />
-         <param label="Minimum Peaks" name="min_peaks" type="integer" value="10" argument="-minPeaks" help="Min peaks in spectrum" />
-         <param label="Minimum Score" name="min_score" type="integer" value="5" argument="-minScore" help="Minimum score to consider for peptide searching" />
-         <param label="Number of Random Peptides" name="num_random_peptides" type="integer" value="1000" argument="-n" help="The number of random peptides" />
-
-         -->
     </inputs>
     <outputs>
         <data format="tabular" name="psm" from_work_dir="pepquery_output/psm.txt" label="${tool.name} on ${on_string}: PSM"/>
