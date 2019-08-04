@@ -37,6 +37,14 @@
                 #if $modifications.unmodified
                     -um
                 #end if
+                -tol '$ms_params.tolerance_params.precursor_tolerance'
+                -tolu '$ms_params.tolerance_params.precursor_unit'
+                -itol '$ms_params.tolerance_params.tolerance'
+                -e '$ms_params.digestion.enzyme'
+                -fragmentMethod '$ms_params.search.frag_method'
+                -m '$ms_params.search.scoring_method'
+                -maxCharge '$ms_params.search.max_charge'
+                -minCharge '$ms_params.search.min_charge'
             -o pepquery_output
         ]]>
     </command>
@@ -126,7 +134,7 @@
         <section name="ms_params" title="Mass spectrometer" expanded="true">
             <section name="tolerance_params" title="Tolerance" expanded="true">
                 <param label="Precursor Tolerance" name="precursor_tolerance" type="integer" value="10" argument="-tol" help="the error window on experimental peptide mass values. This parameter is usually set according to the mass spectrometer which was used to generate the MS/MS data." />
-                <param label="Precursor Unit" name="precursor_unit" type="select" argument="-tolu" help="The unit of precursor ion m/z tolerance, default is ppm">
+                <param label="Precursor Unit" name="precursor_unit" type="select" argument="-tolu" help="The unit of precursor ion m/z tolerance">
                     <option value="ppm" selected="true">ppm</option>
                     <option value="Da">Da</option>
                 </param>
@@ -134,29 +142,30 @@
             </section>
             <section name="digestion" title="Digestion" expanded="true">
                 <param label="Enzyme" name="enzyme" type="select" argument="-e" help="Enzyme used for protein digestion" >
-                    <option value="tryp_def">Trypsin (default)</option>
-                    <option value="tryp_noP">Trypsin (no P rule)</option>
-                    <option value="argc">Arg-C</option>
-                    <option value="argc_noP">Arg-C (no P rule)</option>
-                    <option value="argn">Arg-N</option>
-                    <option value="gluc">Glu-C</option>
-                    <option value="lysc">Lys-C</option>
+                    <option value="0">Non enzyme</option>
+                    <option value="1" selected="true">Trypsin</option>
+                    <option value="2">Trypsin (no P rule)</option>
+                    <option value="3">Arg-C</option>
+                    <option value="4">Arg-C (no P rule)</option>
+                    <option value="5">Arg-N</option>
+                    <option value="6">Glu-C</option>
+                    <option value="7">Lys-C</option>
                 </param>
                 <param label="Max Missed Cleavages" name="max_missed_cleavages" type="integer" value="2" argument="-c" help="The max missed cleavages" />
             </section>
             <section name="search" title="PSM" expanded="true">
                 <param label="Fragmentation Method" name="frag_method" type="select" argument="-fragmentMethod">
-                    <option value="cid_hcd">CID/HCD</option>
-                    <option value="etd">ETD</option>
+                    <option value="1" selected="true">CID/HCD</option>
+                    <option value="2">ETD</option>
                 </param>
                 <param label="Scoring Method" name="scoring_method" type="select" argument="-m">
-                    <option value="hyperscore">HyperScore</option>
-                    <option value="mvh">MVH</option>
+                    <option value="1" selected="true">HyperScore</option>
+                    <option value="2">MVH</option>
                 </param>
                 <param label="Max Charge" name="max_charge" type="integer" value="3" argument="-maxCharge" help="The maximum charge to consider if the charge state is not available" />
                 <param label="Minimum Charge" name="min_charge" type="integer" value="2" argument="-minCharge" help="The minimum charge to consider if the charge state is not available" />
                 <param label="Minimum Peaks" name="min_peaks" type="integer" value="10" argument="-minPeaks" help="Min peaks in spectrum" />
-                <param label="Minimum Score" name="min_score" type="integer" value="5" argument="-minScore" help="Minimum score to consider for peptide searching" />
+                <param label="Minimum Score" name="min_score" type="integer" value="12" argument="-minScore" help="Minimum score to consider for peptide searching" />
                 <param label="Number of Random Peptides" name="num_random_peptides" type="integer" value="1000" argument="-n" help="The number of random peptides" />
             </section>
         </section>
