@@ -1,4 +1,4 @@
-<tool id="pepquery" name="PepQuery" version="1.0">
+<tool id="pepquery" name="PepQuery" version="@VERSION@">
     <description>Peptide-centric search engine for novel peptide identification and validation.</description>
     <macros>
         <import>macros.xml</import>
