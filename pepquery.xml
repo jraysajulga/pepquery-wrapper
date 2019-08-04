@@ -17,6 +17,10 @@
                 
                 -fixMod '$modifications.fixed_mod'
                 -varMod '$modifications.var_mod'
+                -maxVar '$modifications.max_mods'
+                #if $modifications.unmodified
+                    -um
+                #end if
             -o pepquery_output
         ]]>
     </command>
