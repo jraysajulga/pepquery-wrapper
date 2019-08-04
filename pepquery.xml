@@ -13,8 +13,18 @@
             pepquery 
                 -ms '${req_inputs.spectrum_file}.mgf'
                 -db '${req_inputs.db_file}.fa'
-                -pep '$req_inputs.input_type.peptide_input_type.search_seq'
-                
+                #if $req_inputs.input_type.input_type_selector == 'peptide'
+                    -pep '$req_inputs.input_type.multiple.input'
+                #else
+                    -t '$req_inputs.input_type.input_type_selector'
+                    #if $req_inputs.input_type.input_type_selector < 3
+                        -i '$req_inputs.input_type.multiple.input'
+                        -f '$req_inputs.input_type.frame'
+                    #else
+                        -i '$req_inputs.input_type.input'
+                        -anno '$req_inputs.input_type.anno'
+                    #end if
+                #end if
                 -fixMod '$modifications.fixed_mod'
                 -varMod '$modifications.var_mod'
                 -maxVar '$modifications.max_mods'
@@ -36,39 +46,39 @@
                     <option value="5">GTF (translate to protein sequences)</option>
                 </param>
                 <when value="peptide">
-                    <conditional name="peptide_input_type">
+                    <conditional name="multiple">
                         <param name="peptide_input_selector" label="Multiple peptides?" type="boolean" help="" />
                         <when value="true">
-                            <param label="Peptide Sequences (.txt)" name="search_seq" type="data" argument="-pep" help="Peptide sequence file containing peptides which you want to search (no column header)." />
+                            <param label="Peptide Sequences (.txt)" name="input" type="data" argument="-pep" help="Peptide sequence file containing peptides which you want to search (no column header)." />
                         </when>
                         <when value="false">
-                            <param label="Peptide Sequence" name="search_seq" type="text" argument="-pep" help="Peptide sequence which you want to search" />
+                            <param label="Peptide Sequence" name="input" type="text" argument="-pep" help="Peptide sequence which you want to search" />
                         </when>
                     </conditional>
                 </when>
                 <when value="1">
-                    <conditional name="protein_input_type">
+                    <conditional name="multiple">
                         <param name="protein_input_selector" label="Multiple protein sequences?" type="boolean" help="" />
                         <when value="true">
-                            <param label="Protein Sequences (.txt)" name="search_seq" type="data" argument="-i" help="Protein sequence file containing proteins which you want to search (no column header)." />
+                            <param label="Protein Sequences (.txt)" name="input" type="data" argument="-i" help="Protein sequence file containing proteins which you want to search (no column header)." />
                         </when>
                         <when value="false">
-                            <param label="Protein Sequence" name="search_seq" type="text" argument="-i" help="Protein sequence which you want to search" />
+                            <param label="Protein Sequence" name="input" type="text" argument="-i" help="Protein sequence which you want to search" />
                         </when>
                     </conditional>
                 </when>
                 <when value="2">
-                    <conditional name="dna_input_type">
+                    <conditional name="multiple">
                         <param name="dna_input_selector" label="Multiple DNA sequences?" type="boolean" help="" />
                         <when value="true">
-                            <param label="DNA Sequences (.txt)" name="search_seq" type="data" argument="-i" help="DNA sequence file containing proteins which you want to search (no column header)." />
+                            <param label="DNA Sequences (.txt)" name="input" type="data" argument="-i" help="DNA sequence file containing proteins which you want to search (no column header)." />
 
                         </when>
                         <when value="false">
-                            <param label="DNA Sequence" name="search_seq" type="text" argument="-i" help="DNA sequence which you want to search" />
+                            <param label="DNA Sequence" name="input" type="text" argument="-i" help="DNA sequence which you want to search" />
                         </when>
                     </conditional>
-                    <param label="Frame(s) for DNA translation" name="frame" display="checkbox" type="select" multiple="true" help="The frame(s) to translate DNA sequence to protein. Selecting nothing (default) keeps the longest frame">
+                    <param label="Frame(s) for DNA translation" name="frame" display="checkbox" type="select" argument="-f" multiple="true" help="The frame(s) to translate DNA sequence to protein. Selecting nothing (default) keeps the longest frame">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -78,15 +88,15 @@
                     </param>
                 </when>
                 <when value="3">   
-                    <param label="VCF File" name="search_seq" format="vcf" type="data" argument="-i" help="" />
+                    <param label="VCF File" name="input" format="vcf" type="data" argument="-i" help="" />
                     <param label="Annotation Files" name="anno" type="data" multiple="true" argument="-anno" help="Annotation files for the VCF file. Please follow preparation instructions here: http://bioconductor.org/packages/devel/bioc/html/PGA.html" />
                 </when>
                 <when value="4">   
-                    <param label="BED File" name="search_seq" format="bed" type="data" argument="-i" help="" />
+                    <param label="BED File" name="input" format="bed" type="data" argument="-i" help="" />
                     <param label="Annotation Files" name="anno" type="data" multiple="true" argument="-anno" help="Annotation files for the BED file. Please follow preparation instructions here: http://bioconductor.org/packages/devel/bioc/html/PGA.html" />
                 </when>
                 <when value="5">   
-                    <param label="GTF File" name="search_seq" format="gtf" type="data" argument="-i" help="" />
+                    <param label="GTF File" name="input" format="gtf" type="data" argument="-i" help="" />
                     <param label="Annotation Files" name="anno" type="data" multiple="true" argument="-anno" help="Annotation files for the GTF file. Please follow preparation instructions here: http://bioconductor.org/packages/devel/bioc/html/PGA.html" />
                 </when>
             </conditional>
