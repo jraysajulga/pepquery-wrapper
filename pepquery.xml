@@ -17,9 +17,15 @@
                     -pep '$req_inputs.input_type.multiple.input'
                 #else
                     -t '$req_inputs.input_type.input_type_selector'
-                    #if $req_inputs.input_type.input_type_selector < 3
+                    #if int(str($req_inputs.input_type.input_type_selector)) < 3
                         -i '$req_inputs.input_type.multiple.input'
-                        -f '$req_inputs.input_type.frame'
+                        #if $req_inputs.input_type.input_type_selector == '2'
+                            #if $req_inputs.input_type.frame == 'None'
+                                -f '0'
+                            #else
+                                -f '$req_inputs.input_type.frame'
+                            #end if
+                        #end if
                     #else
                         -i '$req_inputs.input_type.input'
                         -anno '$req_inputs.input_type.anno'
