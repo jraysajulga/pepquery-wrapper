@@ -70,7 +70,7 @@
                     <conditional name="multiple">
                         <param name="peptide_input_selector" label="Multiple peptides?" type="boolean" help="" />
                         <when value="true">
-                            <param label="Peptide Sequences (.txt)" name="input" type="data" argument="-pep" help="Peptide sequence file containing peptides which you want to search (no column header)." />
+                            <param label="Peptide Sequences (.txt)" name="input" type="data" format="txt" argument="-pep" help="Peptide sequence file containing peptides which you want to search (no column header)." />
                         </when>
                         <when value="false">
                             <param label="Peptide Sequence" name="input" type="text" argument="-pep" help="Peptide sequence which you want to search" />
@@ -81,7 +81,7 @@
                     <conditional name="multiple">
                         <param name="protein_input_selector" label="Multiple protein sequences?" type="boolean" help="" />
                         <when value="true">
-                            <param label="Protein Sequences (.txt)" name="input" type="data" argument="-i" help="Protein sequence file containing proteins which you want to search (no column header)." />
+                            <param label="Protein Sequences (.txt)" name="input" type="data" format="txt" argument="-i" help="Protein sequence file containing proteins which you want to search (no column header)." />
                         </when>
                         <when value="false">
                             <param label="Protein Sequence" name="input" type="text" argument="-i" help="Protein sequence which you want to search" />
@@ -92,7 +92,7 @@
                     <conditional name="multiple">
                         <param name="dna_input_selector" label="Multiple DNA sequences?" type="boolean" help="" />
                         <when value="true">
-                            <param label="DNA Sequences (.txt)" name="input" type="data" argument="-i" help="DNA sequence file containing proteins which you want to search (no column header)." />
+                            <param label="DNA Sequences (.txt)" name="input" type="data" format="txt" argument="-i" help="DNA sequence file containing proteins which you want to search (no column header)." />
 
                         </when>
                         <when value="false">
@@ -110,15 +110,15 @@
                 </when>
                 <when value="3">   
                     <param label="VCF File" name="input" format="vcf" type="data" argument="-i" help="" />
-                    <param label="Annotation Files" name="anno" type="data" multiple="true" argument="-anno" help="Annotation files for the VCF file. Please follow preparation instructions here: http://bioconductor.org/packages/devel/bioc/html/PGA.html" />
+                    <param label="Annotation Files" name="anno" type="data_collection" argument="-anno" help="Annotation files for the VCF file. Please follow preparation instructions here: http://bioconductor.org/packages/devel/bioc/html/PGA.html" />
                 </when>
                 <when value="4">   
                     <param label="BED File" name="input" format="bed" type="data" argument="-i" help="" />
-                    <param label="Annotation Files" name="anno" type="data" multiple="true" argument="-anno" help="Annotation files for the BED file. Please follow preparation instructions here: http://bioconductor.org/packages/devel/bioc/html/PGA.html" />
+                    <param label="Annotation Files" name="anno" type="data_collection" argument="-anno" help="Annotation files for the BED file. Please follow preparation instructions here: http://bioconductor.org/packages/devel/bioc/html/PGA.html" />
                 </when>
                 <when value="5">   
                     <param label="GTF File" name="input" format="gtf" type="data" argument="-i" help="" />
-                    <param label="Annotation Files" name="anno" type="data" multiple="true" argument="-anno" help="Annotation files for the GTF file. Please follow preparation instructions here: http://bioconductor.org/packages/devel/bioc/html/PGA.html" />
+                    <param label="Annotation Files" name="anno" type="data_collection" argument="-anno" help="Annotation files for the GTF file. Please follow preparation instructions here: http://bioconductor.org/packages/devel/bioc/html/PGA.html" />
                 </when>
             </conditional>
             <param label="Database File" name="db_file" type="data" format="fasta" argument="-db" help="Fasta format database file" />
@@ -181,12 +181,11 @@
     </inputs>
     <outputs>
         <data format="tabular" name="psm" from_work_dir="pepquery_output/psm.txt" label="${tool.name} on ${on_string}: PSM"/>
-        <!--<data format="tabular" name="psm_annotation" from_work_dir="pepquery_output/psm_annotation.txt" label="${tool.name} on ${on_string}: PSM Annotation"/>
+        <data format="tabular" name="psm_annotation" from_work_dir="pepquery_output/psm_annotation.txt" label="${tool.name} on ${on_string}: PSM Annotation"/>
         <data format="tabular" name="detail" from_work_dir="pepquery_output/detail.txt" label="${tool.name} on ${on_string}: Detail"/>
         <data format="tabular" name="psm_rank_mgf" from_work_dir="pepquery_output/psm_rank.mgf" label="${tool.name} on ${on_string}: PSM Rank (mgf)"/>
-        <data format="tabular" name="psm_rank_txt" from_work_dir="pepquery_output/psm_rank.txt" label="${tool.name} on ${on_string}: PSM Rank (txt)"/>-->
+        <data format="tabular" name="psm_rank_txt" from_work_dir="pepquery_output/psm_rank.txt" label="${tool.name} on ${on_string}: PSM Rank (txt)"/>
     </outputs>
-
     
     <help><![CDATA[
         PepQuery is a peptide-centric search engine for novel peptide identification and validation. Cancer genomics studies have identified a large number of genomic alterations that may lead to novel, cancer-specific protein sequences. Proteins resulted from these genomic alterations are attractive candidates for cancer biomarkers and therapeutic targets. The leading approach to proteomic validation of genomic alterations is to analyze tandem mass spectrometry (MS/MS) data using customized proteomics databases created from genomics data. Such analysis is time-consuming and requires thorough training and detailed knowledge in proteomics data analysis, leading to a gap between MS/MS data and the cancer genomics community. PepQuery does not require customized databases and allows quick and easy proteomic validation of genomic alterations.
