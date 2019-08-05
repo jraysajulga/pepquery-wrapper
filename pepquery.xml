@@ -99,7 +99,7 @@
                             <param label="DNA Sequence" name="input" type="text" argument="-i" help="DNA sequence which you want to search" />
                         </when>
                     </conditional>
-                    <param label="Frame(s) for DNA translation" name="frame" display="checkbox" type="select" argument="-f" multiple="true" help="The frame(s) to translate DNA sequence to protein. Selecting nothing (default) keeps the longest frame">
+                    <param label="Frame(s) for DNA translation" name="frame" type="select" argument="-f" multiple="true" help="The frame(s) to translate DNA sequence to protein. Selecting nothing (default) keeps the longest frame">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
