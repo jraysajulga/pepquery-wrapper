@@ -37,6 +37,9 @@
                 #if $modifications.unmodified
                     -um
                 #end if
+                #if $modifications.aa
+                    -aa
+                #end if
                 -tol '$ms_params.tolerance_params.precursor_tolerance'
                 -tolu '$ms_params.tolerance_params.precursor_unit'
                 -itol '$ms_params.tolerance_params.tolerance'
@@ -47,6 +50,7 @@
                 -minCharge '$ms_params.search.min_charge'
                 -minPeaks '$ms_params.search.min_peaks'
                 -minScore '$ms_params.search.min_score'
+                -maxLength '$ms_params.search.max_length'
                 -n '$ms_params.search.num_random_peptides'
             -o pepquery_output
         ]]>
@@ -132,7 +136,8 @@
                 <expand macro="modifications" />
              </param>
              <param label="Max Modifications" name="max_mods" type="integer" value="3" argument="-maxVar" help="Max number of variable modifications" />
-             <param label="Unmodified" name="unmodified" type="boolean" value="false" argument="-um" help="Validation with unrestricted modification searching" />
+             <param label="Unmodified?" name="unmodified" type="boolean" value="false" argument="-um" help="Validation with unrestricted modification searching" />
+             <param label="Consider amino acid substitution modifications?" name="aa" type="boolean" value="false" argument="-aa" help="Whether or not to consider aa substitution modifications when perform modification filtering." />
         </section>
         <section name="ms_params" title="Mass spectrometer" expanded="true">
             <section name="tolerance_params" title="Tolerance" expanded="true">
@@ -169,6 +174,7 @@
                 <param label="Minimum Charge" name="min_charge" type="integer" value="2" argument="-minCharge" help="The minimum charge to consider if the charge state is not available" />
                 <param label="Minimum Peaks" name="min_peaks" type="integer" value="10" argument="-minPeaks" help="Min peaks in spectrum" />
                 <param label="Minimum Score" name="min_score" type="integer" value="12" argument="-minScore" help="Minimum score to consider for peptide searching" />
+                <param label="Maximum length of peptide" name="max_length" type="integer" value="45" argument="-maxLength" help="The maximum length of peptide to consider." />
                 <param label="Number of Random Peptides" name="num_random_peptides" type="integer" value="1000" argument="-n" help="The number of random peptides" />
             </section>
         </section>
