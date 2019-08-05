@@ -45,6 +45,9 @@
                 -m '$ms_params.search.scoring_method'
                 -maxCharge '$ms_params.search.max_charge'
                 -minCharge '$ms_params.search.min_charge'
+                -minPeaks '$ms_params.search.min_peaks'
+                -minScore '$ms_params.search.min_score'
+                -n '$ms_params.search.num_random_peptides'
             -o pepquery_output
         ]]>
     </command>
